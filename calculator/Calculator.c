@@ -1,5 +1,5 @@
 #include <stdio.h>
-main()
+ int main()
 {
   int x, y, z, a, s, count=1;
   while(count<5)
@@ -21,7 +21,7 @@ main()
       printf("Answer : %d\n", z);
       break;
       case 3 :
-      printf("Entered choice is MULTIPLICATION.\nEntet any two numbers to be multiplied.\n");
+      printf("Entered choice is MULTIPLICATION.\nEnter any two numbers to be multiplied.\n");
       scanf("%d%d", &x, &y);
       z=x*y;
       printf("Answer : %d\n", z);
@@ -39,4 +39,6 @@ main()
       printf("*******************************************************\n");
     count+=1;
   }
+  return 0;
 }
+
