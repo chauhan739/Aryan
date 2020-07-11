@@ -4,7 +4,7 @@ int main()
 {
   int a, b, c, D, count=1;
   float x, y, p, q;
-  while(count<5)
+  while(count<=5)
   {
     printf("Enter the coefficient of x^2 and x and the constant term.\n ");
     scanf("%d%d%d", &a, &b, &c);
