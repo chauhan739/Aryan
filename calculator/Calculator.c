@@ -2,7 +2,7 @@
  int main()
 {
   int x, y, z, a, s, count=1;
-  while(count<5)
+  while(count<=5)
   {
     printf("Enter your choice number.\n1.Addition\n2.Subtraction\n3.Multiplication\n4.Division\n");
     scanf("%d", &a);
@@ -41,4 +41,3 @@
   }
   return 0;
 }
-
