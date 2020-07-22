@@ -27,7 +27,7 @@
       printf("Answer : %d\n", z);
       break;
       case 4 :
-      printf("Entered choice is DIVISION.\nEnter any tao numbers to be divided.\n");
+      printf("Entered choice is DIVISION.\nEnter any two numbers to be divided.\n");
       scanf("%d%d", &x, &y);
       z=x/y;
       s=x%y;
