@@ -1,0 +1,407 @@
+:root {
+  --base-speed: 0.5s;
+
+  --domino-speed: calc(var(--base-speed) * 1.3);
+  /**
+   * Dominos hit the next domino before finishing their animation. We start the
+   * next domino's animation when they actually hit.
+   */
+  --domino-hit-speed: calc(var(--domino-speed) * 0.25);
+  /**
+   * The final domino falls all the way down instead of resting on another
+   * domino. Since it has further to go, its duration lasts longer so it appears
+   * to be going the same speed.
+   */
+  --last-domino-speed: calc(var(--domino-speed) * 10 / 9);
+
+  --domino-1-delay: 0s;
+  --domino-2-delay: calc(var(--domino-1-delay) + var(--domino-hit-speed));
+  --domino-3-delay: calc(var(--domino-2-delay) + var(--domino-hit-speed));
+  --domino-4-delay: calc(var(--domino-3-delay) + var(--domino-hit-speed));
+  --domino-5-delay: calc(var(--domino-4-delay) + var(--domino-hit-speed));
+  --domino-6-delay: calc(var(--domino-5-delay) + var(--domino-hit-speed));
+
+  --ball-and-string-speed: calc(var(--base-speed) * 2);
+  --ball-and-string-delay: calc(
+    var(--domino-6-delay) + var(--domino-speed) * 0.3
+  );
+
+  --car-speed: calc(var(--base-speed) * 3);
+  --car-delay: calc(
+    var(--ball-and-string-delay) + var(--ball-and-string-speed) * 0.25
+  );
+
+  --_8-ball-speed: calc(var(--base-speed) * 4.5);
+  --_8-ball-delay: calc(var(--car-delay) + var(--car-speed) * 0.62);
+
+  --domino-7-delay: calc(var(--_8-ball-delay) + var(--_8-ball-speed) * 0.9);
+  --domino-8-delay: calc(var(--domino-7-delay) + var(--domino-hit-speed));
+  --domino-9-delay: calc(var(--domino-8-delay) + var(--domino-hit-speed));
+  --domino-10-delay: calc(var(--domino-9-delay) + var(--domino-hit-speed));
+  --domino-11-delay: calc(var(--domino-10-delay) + var(--domino-hit-speed));
+  --domino-12-delay: calc(var(--domino-11-delay) + var(--domino-hit-speed));
+
+  --last-ball-speed: calc(var(--base-speed) * 3);
+  --last-ball-delay: calc(var(--domino-12-delay) + var(--domino-hit-speed));
+
+  --total-duration: calc(var(--last-ball-delay) + var(--last-ball-speed));
+}
+
+svg {
+  background: #efefd3;
+  height: 60vw;
+  max-height: 350px;
+  transform-origin: top left;
+  transition: transform var(--total-duration) ease;
+}
+
+svg.game-on {
+  transform: translateX(calc(-100% + 100vw));
+}
+
+svg * {
+  transform-box: fill-box;
+}
+
+.domino {
+  transform-box: fill-box;
+  transition: transform var(--domino-speed);
+  transform-origin: bottom right;
+}
+
+.domino-last {
+  transition-duration: var(--last-domino-speed);
+}
+
+.domino-2 {
+  transition-delay: var(--domino-2-delay);
+}
+.domino-3 {
+  transition-delay: var(--domino-3-delay);
+}
+.domino-4 {
+  transition-delay: var(--domino-4-delay);
+}
+.domino-5 {
+  transition-delay: var(--domino-5-delay);
+}
+.domino-6 {
+  transition-delay: var(--domino-6-delay);
+}
+.domino-7 {
+  transition-delay: var(--domino-7-delay);
+}
+.domino-8 {
+  transition-delay: var(--domino-8-delay);
+}
+.domino-9 {
+  transition-delay: var(--domino-9-delay);
+}
+.domino-10 {
+  transition-delay: var(--domino-10-delay);
+}
+.domino-11 {
+  transition-delay: var(--domino-11-delay);
+}
+.domino-12 {
+  transition-delay: var(--domino-12-delay);
+}
+
+.game-on .domino {
+  transform: rotate(76deg);
+}
+
+.game-on .domino-last {
+  transform: rotate(90deg);
+}
+
+#Ball_and_String {
+  transform: rotate(33deg);
+  transition: transform var(--ball-and-string-speed);
+  transition-delay: var(--ball-and-string-delay);
+  transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+  /* This is broken in webkit without these rules */
+  transform-box: unset;
+  transform-origin: 914px -38px;
+}
+
+.game-on #Ball_and_String {
+  transform: rotate(-20deg);
+}
+
+#Car {
+  transition: transform var(--car-speed);
+  transition-delay: var(--car-delay);
+}
+
+.game-on #Car {
+  transform: translateX(710px);
+}
+
+.game-on .wheel {
+  animation: spin;
+  animation-duration: var(--car-speed);
+  animation-delay: var(--car-delay);
+  transform-origin: center;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(1080deg);
+  }
+}
+
+.game-on #_8_Ball,
+.game-on ._8-ball-center {
+  animation: _8_ball_outer;
+  animation-duration: var(--_8-ball-speed);
+  animation-delay: var(--_8-ball-delay);
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+  transform-origin: center;
+}
+
+.game-on ._8-ball-center {
+  animation-name: _8_ball_center;
+}
+
+@keyframes _8_ball_outer {
+  from {
+    transform: translate(0, 0);
+  }
+  35% {
+    transform: translate(715px, 115px);
+  }
+  65% {
+    transform: translate(405px, 173px);
+  }
+  to {
+    transform: translate(1120px, 265px);
+  }
+}
+
+@keyframes _8_ball_center {
+  from {
+    transform: rotate(0deg);
+  }
+
+  35% {
+    transform: rotate(720deg);
+  }
+
+  65% {
+    transform: rotate(360deg);
+  }
+
+  to {
+    transform: rotate(1080deg);
+  }
+}
+
+#Final_Ball {
+  transition: transform var(--last-ball-speed);
+  transition-delay: var(--last-ball-delay);
+  transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.game-on #Final_Ball {
+  transform: translateX(325px);
+}
+
+.game-on #ball-bumps {
+  animation-name: spin;
+  animation-duration: var(--last-ball-speed);
+  animation-delay: var(--last-ball-delay);
+  animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation-fill-mode: forwards;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/**
+ * Base SVG styles: fills, strokes, etc.
+ */
+
+.box {
+  fill: #c6c4a1;
+}
+.box-lid {
+  fill: #afac84;
+}
+
+.domino {
+  fill: #ffffff;
+  stroke: #000000;
+  stroke-width: 1.8046;
+  stroke-miterlimit: 10;
+}
+
+.ball-1 {
+  fill: #9ec10c;
+  stroke: #ffffff;
+  stroke-width: 1.8;
+  stroke-miterlimit: 10;
+}
+
+.t-ball-texture {
+  fill: none;
+  stroke-width: 5;
+  stroke-dasharray: 2;
+}
+.t-ball-texture-1 {
+  stroke: #f9f910;
+}
+.t-ball-texture-2 {
+  stroke: #f4f3c6;
+}
+.t-ball-texture-3 {
+  stroke: #abf22f;
+}
+
+.string-bg {
+  fill: none;
+  stroke: #e2ae7a;
+  stroke-width: 7;
+  stroke-miterlimit: 10;
+}
+
+.string-fg {
+  fill: none;
+  stroke: #00a6f9;
+  stroke-width: 5;
+  stroke-miterlimit: 10;
+  stroke-dasharray: 11.7676, 11.7676;
+}
+
+.car-grey-bg {
+  fill: #4c4c4b;
+}
+
+.tire-bg {
+  fill: #42290f;
+}
+
+.car-bg {
+  fill: #f94212;
+}
+
+.tire-dark {
+  fill: #0c0601;
+}
+
+.wheel-spoke {
+  fill: #877d77;
+}
+
+.tire-dark-stroke {
+  fill: none;
+  stroke: #0c0601;
+  stroke-width: 2.1673;
+  stroke-miterlimit: 10;
+}
+
+.wheel-center {
+  fill: #ddd8d4;
+}
+
+.car-detail {
+  fill: none;
+  stroke: #877d77;
+  stroke-width: 6.5s018;
+  stroke-linejoin: round;
+  stroke-miterlimit: 10;
+}
+
+.tire-highlight {
+  fill: #f94212;
+  stroke: #444342;
+  stroke-width: 0.399;
+  stroke-miterlimit: 10;
+}
+
+.window {
+  opacity: 0.2;
+  enable-background: new;
+}
+
+.car-detail-1 {
+  fill: #444342;
+}
+
+._8-ball-bg {
+  stroke: #ffffff;
+  stroke-width: 2.5469;
+  stroke-miterlimit: 10;
+}
+
+._8-ball-white {
+  fill: #ffffff;
+  stroke: #ffffff;
+  stroke-width: 0.8906;
+  stroke-miterlimit: 10;
+}
+
+.last-ball {
+  fill: #c13636;
+  stroke: #ffffff;
+  stroke-width: 4.5644;
+  stroke-miterlimit: 10;
+}
+
+.ball-bump {
+  fill: #823434;
+}x
+
+/**
+ * Page layout stuff
+ */
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  overflow: hidden;
+  position: fixed;
+}
+
+body {
+  background: #c6c4a1;
+}
+
+.wrapper {
+  position: relative;
+}
+
+.controls {
+  background: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  padding: 1em;
+  position: fixed;
+  bottom: 0;
+}
+
+button {
+  background: #fff;
+  border: none;
+  border-radius: 0.2em;
+  color: #1d70a4;
+  cursor: pointer;
+  font-size: 1em;
+  border: none;
+  padding: 0.75em 1.25em;
+  transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
+}
+
+button:hover {
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3);
+  transform: scale(1.01) translateY(-2px);
+}
+
+button:active {
+  box-shadow: none;
+  transform: scale(0.99);
+}
