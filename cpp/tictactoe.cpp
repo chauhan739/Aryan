@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdlib.h>
+#include <cstdlib>
 using namespace std;
 
 char square[10] = {'o', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
@@ -15,8 +16,10 @@ int main(){
     char mark;
     
     do{
+        //Print Board
         board();
         
+        //Selection of player
         if(player % 2 == 0)
             player = 2;
         else
@@ -26,12 +29,14 @@ int main(){
         cin>>choice;
         cout<<endl;
         
+        //Selection of Mark of player
         if(player == 1)
             mark = 'X';
         else
             mark = 'O';
         
         
+        //Marking on game board
         if(choice == 1 && square[1] == '1'){
             square[1] = mark;
         }
@@ -68,7 +73,8 @@ int main(){
         }
         i = checkWin();
         player++;
-    }while(i == -1);
+        
+    }while(i != -1);
     
     if(i ==1)
         cout<<"Player "<<--player<<" won";
@@ -78,8 +84,8 @@ int main(){
 
 void board(){
     
-    //Clear screen
-    system("cls");
+    //Clear the board
+    system("clear");
     
     cout<<"Tic-Tac-Toe game\n\n";
     cout<<"Player 1(X) - Player 2(O)\n\n";
@@ -96,23 +102,31 @@ void board(){
     cout<<"     |     |     \n";
 }
 
-int checkWin(){
+int checkWin(void){
+  
+    //Possibility of winning game horizontally
     if(square[1] == square[2] && square[2] == square[3])
         return 1;
     else if(square[4] == square[5] && square[5] == square[6])
         return 1;
     else if(square[7] == square[8] && square[8] == square[9])
         return 1;
+    
+    //Possibility of winning game vertically
     else if(square[1] == square[4] && square[4] == square[7])
         return 1;
     else if(square[2] == square[5] && square[5] == square[8])
         return 1;
     else if(square[3] == square[6] && square[6] == square[9])
         return 1;
+    
+    //Possibility of winning game diagonally
     else if(square[1] == square[5] && square[5] == square[9])
         return 1;
     else if(square[3] == square[5] && square[5] == square[7])
         return 1;
+    
+    //Possibility of continuing the game
     else if(square[1] != 1 && square[2] != 2 && square[3] != 3 && square[4] != 4 && square[5] != 5 && square[6] != 6 && square[7] != 7 && square[8] != 8 && square[9] != 9)
         return 0;
     else 
