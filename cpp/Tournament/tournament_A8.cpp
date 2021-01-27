@@ -43,11 +43,12 @@ int main()
   
   int x = sizeof(players) / sizeof(players[0]);
   srand(time(0));
+  random_shuffle(players, players + x);
+
   printMatch(players, n);
   
-
   
-    return 0;
+  return 0;
 }
 
 void printMatch(Racer a[], int n){
