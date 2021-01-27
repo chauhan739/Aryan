@@ -60,6 +60,7 @@ void printMatch(Racer a[], int n){
     a[i+1].putDetails();
     cout << endl;
   }
-  cout << "/n/nThis Match Making is done by a computer program (made by chauhan739IN).\nThis program is completly fair and unbiased\n";
+  cout << "\n\nThis Match Making is done by a computer program (made by chauhan739IN).\nThis program is completly fair and unbiased\n";
+  cout << "You cab check the program authenticity if you havon any doubt on it.\n";
   cout << "This program is avaiable on GitHub.";
 }
