@@ -52,3 +52,8 @@ void print(int A[], int n){
   }
   cout << endl;
 }
+
+/* Note:-
+   This sorting algorithm is called 'Selection Sort' as it 
+   iterates throughout the array. It selects the current 
+   smallest and swaps it into place. */
