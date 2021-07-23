@@ -1,3 +1,7 @@
+(toggle-scroll-bar -1)
+(menu-bar-mode)
+(tool-bar-mode -1)
+
 (require 'package)
 (setq package-enable-at-startup nil)
 (add-to-list 'package-archives
@@ -8,6 +12,10 @@
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
+
+(use-package which-key
+  :ensure t
+  :config (which-key-mode))
 
 (use-package auto-complete
   :ensure t
@@ -49,3 +57,18 @@
 (use-package flycheck
   :ensure t
   :init (global-flycheck-mode))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes '(wombat))
+ '(inhibit-startup-screen t)
+ '(package-selected-packages
+   '(which-key use-package irony-eldoc flycheck company-irony auto-complete)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
