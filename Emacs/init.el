@@ -2,6 +2,9 @@
 (menu-bar-mode)
 (tool-bar-mode -1)
 (global-linum-mode t)
+(global-auto-revert-mode t)
+
+(setq python-shell-interpreter "python3")
 
 (require 'package)
 (setq package-enable-at-startup nil)
@@ -69,20 +72,72 @@
   (add-hook 'python-mode-hook 'jedi-setup)
   (add-hook 'python-mode-hook 'jedi:ac-setup))
 
-(use-package python-mode
-  :ensure nil
-  :custom
-  (python-shell-interpreter "python3"))
+(use-package quickrun
+  :ensure t)
+;; After Downloading Quickrun, then execute the below command
+(require 'quickrun)
+(global-set-key [f5] (quote quickrun))
 
+;; First download lsp-java from package manager
+(require 'lsp-java)
+(add-hook 'java-mode-hook #'lsp)
+
+(dap-register-debug-template "My Runner"
+                             (list :type "java"
+                                   :request "launch"
+                                   :args ""
+                                   :vmArgs "-ea -Dmyapp.instance.name=myapp_1"
+                                   :projectName "myapp"
+                                   :mainClass "com.domain.AppRunner"
+                                   :env '(("DEV" . "1"))))
+
+;;; This will enable emacs to compile a simple cpp single file without any makefile by just pressin `F9` key
+(defun code-compile()
+  (interactive)
+  (unless (file-exists-p "Makefile")
+    (set (make-local-variable 'compile-command)
+	 (let ((file (file-name-nondirectory buffer-file-name)))
+	   (format "%s -o %s %s"
+		   (if (equal (file-name-extension file) "cpp") "g++" "gcc")
+		   (file-name-sans-extension file)
+		   file)))
+    (compile compile-command)))
+
+(global-set-key [f9] 'code-compile)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector
+   [default bold shadow italic underline bold bold-italic bold])
  '(custom-enabled-themes '(wombat))
+ '(fci-rule-color "#37474f")
+ '(hl-sexp-background-color "#1c1f26")
  '(inhibit-startup-screen t)
  '(package-selected-packages
-   '(material-theme jedi live-py-mode which-key use-package irony-eldoc flycheck company-irony auto-complete)))
+   '(quickrun lsp-java material-theme jedi live-py-mode which-key use-package irony-eldoc flycheck company-irony auto-complete))
+ '(vc-annotate-background nil)
+ '(vc-annotate-color-map
+   '((20 . "#f36c60")
+     (40 . "#ff9800")
+     (60 . "#fff59d")
+     (80 . "#8bc34a")
+     (100 . "#81d4fa")
+     (120 . "#4dd0e1")
+     (140 . "#b39ddb")
+     (160 . "#f36c60")
+     (180 . "#ff9800")
+     (200 . "#fff59d")
+     (220 . "#8bc34a")
+     (240 . "#81d4fa")
+     (260 . "#4dd0e1")
+     (280 . "#b39ddb")
+     (300 . "#f36c60")
+     (320 . "#ff9800")
+     (340 . "#fff59d")
+     (360 . "#8bc34a")))
+ '(vc-annotate-very-old-color nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
