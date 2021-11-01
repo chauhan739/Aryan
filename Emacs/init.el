@@ -72,6 +72,10 @@
   (add-hook 'python-mode-hook 'jedi-setup)
   (add-hook 'python-mode-hook 'jedi:ac-setup))
 
+;; Using package dumb-jump for jumping on function definition
+(use-package dumb-jump
+  :ensure t)
+
 (use-package quickrun
   :ensure t)
 ;; After Downloading Quickrun, then execute the below command
@@ -81,15 +85,6 @@
 ;; First download lsp-java from package manager
 (require 'lsp-java)
 (add-hook 'java-mode-hook #'lsp)
-
-(dap-register-debug-template "My Runner"
-                             (list :type "java"
-                                   :request "launch"
-                                   :args ""
-                                   :vmArgs "-ea -Dmyapp.instance.name=myapp_1"
-                                   :projectName "myapp"
-                                   :mainClass "com.domain.AppRunner"
-                                   :env '(("DEV" . "1"))))
 
 ;;; This will enable emacs to compile a simple cpp single file without any makefile by just pressin `F9` key
 (defun code-compile()
@@ -116,7 +111,7 @@
  '(hl-sexp-background-color "#1c1f26")
  '(inhibit-startup-screen t)
  '(package-selected-packages
-   '(quickrun lsp-java material-theme jedi live-py-mode which-key use-package irony-eldoc flycheck company-irony auto-complete))
+   '(dumb-jump quickrun lsp-java material-theme jedi live-py-mode which-key use-package irony-eldoc flycheck company-irony auto-complete))
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
    '((20 . "#f36c60")
