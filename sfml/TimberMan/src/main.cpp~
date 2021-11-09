@@ -16,19 +16,19 @@ int main(){
   RenderWindow window(vm, "TimberMan!!!", Style::Titlebar);
 
   Texture textureBackground;
-  textureBackground.loadFromFile("graphics/Background.png");
+  textureBackground.loadFromFile("../assets/graphics/Background.png");
   Sprite spriteBackground;
   spriteBackground.setTexture(textureBackground);
   spriteBackground.setPosition(0.0f, 0.0f);
 
   Texture textureTree;
-  textureTree.loadFromFile("graphics/BackgroundTree.png");
+  textureTree.loadFromFile("../assets/graphics/BackgroundTree.png");
   Sprite spriteTree;
   spriteTree.setTexture(textureTree);
   spriteTree.setPosition(405.0f, 0.0f);
 
   Texture textureBee;
-  textureBee.loadFromFile("graphics/Bee.png");
+  textureBee.loadFromFile("../assets/graphics/Bee.png");
   Sprite spriteBee;
   spriteBee.setTexture(textureBee);
   spriteBee.setPosition(0, 400);
@@ -36,7 +36,7 @@ int main(){
   float beeSpeed = 0.0f;
 
   Texture textureCloud;
-  textureCloud.loadFromFile("graphics/Cloud.png");
+  textureCloud.loadFromFile("../assets/graphics/Cloud.png");
   Sprite spriteCloud1, spriteCloud2, spriteCloud3;
   spriteCloud1.setTexture(textureCloud);
   spriteCloud2.setTexture(textureCloud);
@@ -71,7 +71,7 @@ int main(){
   int score = 0;
 
   Font font;
-  font.loadFromFile("fonts/special.ttf");
+  font.loadFromFile("../assets/fonts/special.ttf");
 
   Text messageText;
   messageText.setFont(font);
@@ -97,7 +97,7 @@ int main(){
   scoreText.setPosition(10, 10);
 
   Texture textureBranch;
-  textureBranch.loadFromFile("graphics/Branch.png");
+  textureBranch.loadFromFile("../assets/graphics/Branch.png");
 
   for(int i = 0; i < NUM_BRANCHES; i++){
     branches[i].setTexture(textureBranch);
@@ -108,7 +108,7 @@ int main(){
 
   // Prepare the player
   Texture texturePlayer;
-  texturePlayer.loadFromFile("graphics/Player.png");
+  texturePlayer.loadFromFile("../assets/graphics/Player.png");
   Sprite spritePlayer;
   spritePlayer.setTexture(texturePlayer);
   spritePlayer.setPosition(290, 360);
@@ -117,14 +117,14 @@ int main(){
 
   // Prepare the gravestone
   Texture textureRIP;
-  textureRIP.loadFromFile("graphics/Grave.png");
+  textureRIP.loadFromFile("../assets/graphics/Grave.png");
   Sprite spriteRIP;
   spriteRIP.setTexture(textureRIP);
   spriteRIP.setPosition(300, 430);
   
   // Prepare the axe
   Texture textureAxe;
-  textureAxe.loadFromFile("graphics/Axe.png");
+  textureAxe.loadFromFile("../assets/graphics/Axe.png");
   Sprite spriteAxe;
   spriteAxe.setTexture(textureAxe);
   spriteAxe.setPosition(350, 415);
@@ -134,7 +134,7 @@ int main(){
 
   // Prepare the flying log
   Texture textureLog;
-  textureLog.loadFromFile("graphics/Log.png");
+  textureLog.loadFromFile("../assets/graphics/Log.png");
   Sprite spriteLog;
   spriteLog.setTexture(textureLog);
   spriteLog.setPosition(405, 360);
@@ -147,17 +147,17 @@ int main(){
 
   // Preparing the sounds
   SoundBuffer chopBuffer;
-  chopBuffer.loadFromFile("audio/chop.wav");
+  chopBuffer.loadFromFile("../assets/audio/chop.wav");
   Sound chop;
   chop.setBuffer(chopBuffer);
 
   SoundBuffer deathBuffer;
-  deathBuffer.loadFromFile("audio/death.wav");
+  deathBuffer.loadFromFile("../assets/audio/death.wav");
   Sound death;
   death.setBuffer(deathBuffer);
 
   SoundBuffer ootBuffer;
-  ootBuffer.loadFromFile("audio/out_of_time.wav");
+  ootBuffer.loadFromFile("../assets/audio/out_of_time.wav");
   Sound outOfTime;
   outOfTime.setBuffer(ootBuffer);
 
