@@ -129,6 +129,7 @@
   :config (helm-mode))
 (use-package lsp-treemacs
   :ensure t)
+(setq dap-java-java-command "xterm -e java")
 
 ;;; This will enable emacs to compile a simple cpp single file without any makefile by just pressing [f9] key
 (defun code-compile()
